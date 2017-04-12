@@ -31,6 +31,10 @@ namespace ElevenNote.Data
         {
             return new ApplicationDbContext();
         }
+
+        //A list of Notes that entitiy framework knows how to use to create tables
+        public DbSet<Note> Notes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

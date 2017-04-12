@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ElevenNote.Data
 {
@@ -29,5 +31,32 @@ namespace ElevenNote.Data
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Configurations.Add(new IdentityUserLoginConfiguration()).Add(new IdenetityUserRoleConfiguration());
+        }
     }
+  
+   
+    public class IdentityUserLoginConfiguration 
+        : EntityTypeConfiguration<IdentityUserLogin>
+    {
+        public IdentityUserLoginConfiguration()
+        {
+            HasKey(iul => iul.UserId);
+        }
+    }
+
+    public class IdenetityUserRoleConfiguration 
+        : EntityTypeConfiguration<IdentityUserRole>
+    {
+        public IdenetityUserRoleConfiguration()
+        {
+            HasKey(iur => iur.RoleId);
+        }
+    }
+
+    
+
 }

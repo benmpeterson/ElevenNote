@@ -22,6 +22,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*checks to see if User is logged in and if true, displays the Notes button*@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @*"button name, Action Name, Controller*@                        
+                        <li>@Html.ActionLink("Notes", "Index", "Note")</li>
+                    }                    
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

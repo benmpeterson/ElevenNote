@@ -12,10 +12,25 @@ namespace ElevenNote.Web.Controllers
     {
         public ActionResult Index()
         {
-            //TODO ASK DAVE HOW THIS IS CONNECTING TO NOTE VIEWS
-            var model = new NoteListItem[0];
-            return View(model); 
             
+            var model = new NoteListItem[0];
+            return View(model);             
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(NoteCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(model);
         }
     }
 }

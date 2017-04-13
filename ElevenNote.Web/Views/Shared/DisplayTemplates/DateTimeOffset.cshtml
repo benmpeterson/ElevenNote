@@ -1,0 +1,7 @@
+﻿@model System.DateTimeOffset?
+
+@*Convention to wrap displayTemplates in a span*@
+<span>
+    Saying if Date Time Offset has a value we format it to "g" format if it is set to null we put in -. 
+    @(Model.HasValue ? Model.Value.LocalDateTime.ToString("G") : "-")
+</span>

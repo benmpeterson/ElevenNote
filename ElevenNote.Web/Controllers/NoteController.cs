@@ -122,7 +122,7 @@ namespace ElevenNote.Web.Controllers
             TempData["SaveResult"] = "Your note was deleted";
 
             return RedirectToAction("Index");
-        }
+        } 
 
         //Refactored this method since both httpget Create and httppost use the same two lines of code
         private NoteService CreateNoteService()

@@ -98,6 +98,32 @@ namespace ElevenNote.Web.Controllers
             return View(model);
         }
 
+
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateNoteService();
+            var model = svc.GetNoteById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        //Have to change name since there is already a ActionResult named DeletePost with int id parameters
+        //ActionName will keep the route conistant which is looking for a httppost called "Delete"
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateNoteService();
+
+            //TODO: Handle failure See update post for reference 
+            service.DeleteNote(id);
+
+            TempData["SaveResult"] = "Your note was deleted";
+
+            return RedirectToAction("Index");
+        }
+
         //Refactored this method since both httpget Create and httppost use the same two lines of code
         private NoteService CreateNoteService()
         {

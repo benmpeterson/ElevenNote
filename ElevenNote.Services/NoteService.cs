@@ -31,6 +31,8 @@ namespace ElevenNote.Services
             };
 
             //Ask about this using statement and what Note create is being used
+            //Answer - using is only used when calling a function that adds data to a database, needs to dispose 
+            //of it after it has written to the database
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Notes.Add(entity);
@@ -59,9 +61,6 @@ namespace ElevenNote.Services
                 return query.ToArray();
             }
         }
-
-
-
 
     }
 }

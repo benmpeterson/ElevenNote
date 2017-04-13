@@ -37,6 +37,7 @@ namespace ElevenNote.Web.Controllers
                 //TempData is a dictionary that displays text per user in view then is removed only displaying the 
                 //Value of the key
                 TempData ["SaveResult"] = "Your note was created";
+                //TODO WHY COULDN'T YOU DO RETURN View(Index)
                 return RedirectToAction("Index");
             }
 
@@ -45,6 +46,15 @@ namespace ElevenNote.Web.Controllers
             return View(model);
 
         }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateNoteService();
+            var model = svc.GetNoteById(id);
+
+            return View(model);
+        }
+
 
         //Refactored this method since both httpget Create and httppost use the same two lines of code
         private NoteService CreateNoteService()

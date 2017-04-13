@@ -51,10 +51,52 @@ namespace ElevenNote.Web.Controllers
         {
             var svc = CreateNoteService();
             var model = svc.GetNoteById(id);
+           
 
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var service = CreateNoteService();
+            var detail = service.GetNoteById(id);
+            var model =
+                new NoteEdit
+                {
+                    NoteId = detail.NoteId,
+                    Title = detail.Title,
+                    Content = detail.Content
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, NoteEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.NoteId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateNoteService();
+
+            if (service.UpdateNote(model))
+            {
+                //TempData is a dictionary that displays text per user in view then is removed only displaying the 
+                //Value of the key
+                TempData["SaveResult"] = "Your note was updated";
+                //TODO WHY COULDN'T YOU DO RETURN View(Index)
+                return RedirectToAction("Index");
+            }
+
+            //If it fails the ModelState.AddModelError would display that the note was not created in the validation summary
+            ModelState.AddModelError("", "Your note could not be updated.");
+            return View(model);
+        }
 
         //Refactored this method since both httpget Create and httppost use the same two lines of code
         private NoteService CreateNoteService()

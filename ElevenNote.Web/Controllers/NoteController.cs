@@ -128,7 +128,7 @@ namespace ElevenNote.Web.Controllers
         private NoteService CreateNoteService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new NoteService(userId);
+            var service = new NoteService (userId);
             return service;
         }
     }

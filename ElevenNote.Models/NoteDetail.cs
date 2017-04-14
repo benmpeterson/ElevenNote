@@ -15,6 +15,8 @@ namespace ElevenNote.Models
 
         public string Content { get; set; }
 
+        public bool IsStarred { get; set; }
+
         public DateTimeOffset Created { get; set; }
 
         public DateTimeOffset? ModifiedUtc { get; set; }

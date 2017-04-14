@@ -19,7 +19,7 @@ namespace ElevenNote.Data
         public Guid Owner { get; set; }
         [Required]
         public string Title { get; set; }
-        [Required]
+        [Required]  
         public string Content { get; set; }
 
         [DefaultValue(false)]

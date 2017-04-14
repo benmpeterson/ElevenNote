@@ -46,7 +46,8 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsStarred)
+            @*This overload of display for connects the viewbag element from Starred.cshtml*@
+            @Html.DisplayFor(modelItem => item.IsStarred, new { Id = item.NoteId })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedUtc)
@@ -60,3 +61,34 @@
 }
 
 </table>
+
+
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        //$ in javascript means that Jquery is being used
+        $(document).ready(function () {
+           $("i[data-toggle='star']")
+               .css({ "cursor": "pointer" })
+               .click(function (e) {
+                   var target = $(e.target);
+                   var noteId = target.attr("data-id");
+                   var starSet = target.hasClass("glyphicon-star");
+                   //Ajax = asyn javascript and XMLDocument
+                   $.ajax({
+                       method: starSet ? "DELETE" : "PUT",
+                       url: "/api/note/" + noteId + "/star",
+                       data: null
+                   })
+                  //Ajax returns a promise, which is the code below. done == success
+                   .done(function (r) {
+                       target.removeClass();
+                       target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
+                   })
+                  //If it fails, exceutes the following; 
+                   .fail(function (r) {
+                       alert("Failed to change star status");
+                   });
+               });
+       });
+    </script>
+}

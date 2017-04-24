@@ -1,8 +1,9 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ElevenNote.Web
 {
+    //Where all your style bundles are built. The point of bundles is it takes all CSS and Javascripts and minifised it where you can name it
+    //and then call it in in files where it is needed
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862

@@ -1,15 +1,16 @@
-﻿using System;
+﻿using ElevenNote.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using ElevenNote.Web.Models;
-using ElevenNote.Data;
+using System;
 
 namespace ElevenNote.Web
 {
+    //This runs whenever authorization is called. 
+    //Conifgs most of the OWIN stuff, Uncomment code at bottom to enable logging in
+    //With Facebook and twitter
     public partial class Startup
     {
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864

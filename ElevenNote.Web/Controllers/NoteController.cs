@@ -2,9 +2,6 @@
 using ElevenNote.Services;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ElevenNote.Web.Controllers
@@ -12,6 +9,14 @@ namespace ElevenNote.Web.Controllers
     [Authorize]
     public class NoteController : Controller
     {
+        //Refactored this method since both httpget Create and httppost use the same two lines of code
+        private NoteService CreateNoteService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new NoteService(userId);
+            return service;
+        }
+
         public ActionResult Index()
         {            
             var service = CreateNoteService();
@@ -124,12 +129,6 @@ namespace ElevenNote.Web.Controllers
             return RedirectToAction("Index");
         } 
 
-        //Refactored this method since both httpget Create and httppost use the same two lines of code
-        private NoteService CreateNoteService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new NoteService (userId);
-            return service;
-        }
+        
     }
 } 

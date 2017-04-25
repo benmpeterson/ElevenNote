@@ -36,7 +36,7 @@ namespace ElevenNote.Api
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 // In production mode set AllowInsecureHttp = false
-#if Debug
+#if DEBUG
                 AllowInsecureHttp = true
 #else
                 AllowInsecureHttp = false
